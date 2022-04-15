@@ -6,6 +6,13 @@ body{
   font-family: 'nanumsquare';
 }
 
+.list {
+  margin-top : 30px;
+  text-align : left;
+  padding-left : 20px;
+  padding-right : 20px;
+}
+
 .black-nav {
   background : rgb(29, 155, 240);
   width : 100%;
