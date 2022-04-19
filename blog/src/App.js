@@ -8,6 +8,7 @@ function App() {
   let [title, titleChg] = useState(['여름 티셔츠 추천', '선글라스 어디 브랜드가 간지임?', '오늘 설사 오지게 하네..']);
   let [likes, likesChg] = useState(0);
   let [modal, modalChg] = useState(false);
+  let [titleIdx, titleIdxChg] = useState(0);
 
   //React 에서의 반복문(2)
   function example(){
@@ -24,8 +25,14 @@ function App() {
       modalChg(false);
     }else{
       modalChg(true);
-    }
-    
+    }   
+  }
+
+  function addPost(text){
+    console.log(text)
+    let arr = [...title];
+    arr.unshift(text);
+    titleChg(arr);
   }
 
 
@@ -42,10 +49,10 @@ function App() {
 
       {/* React 에서의 반복문(1) */}
       {
-        title.map((el) => {
+        title.map((el, idx) => {
           return (
-            <div className="list">
-              <h3 onClick={modalOpen}>{el}</h3>
+            <div className="list" key={idx}>
+              <h3 onClick={modalOpen} data-id={idx}>{el}</h3>
               <p>2월 17일 발행</p>
               <hr />
             </div>
@@ -58,11 +65,14 @@ function App() {
         example()
       } */}
 
-
-      <button onClick={modalOpen}>모달 버튼</button>
+        <div className="publish">
+          <input></input>
+        <button onClick={() => addPost()}>저장</button>
+        </div>
+      
       {
         modal === true
-        ? <Modal></Modal>
+        ? <Modal title={title}></Modal>
         : null
       }
 
@@ -70,10 +80,10 @@ function App() {
   );
 }
 
-function Modal() {
+function Modal(props) {
   return (
     <div>
-      <h2>테스트</h2>
+      <h2>{props.title[0]}</h2>
     </div>
   )
 }
